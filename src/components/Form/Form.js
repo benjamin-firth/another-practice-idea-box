@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addActivity } from '../../actions/index';
 
 const Form = () => {
   const [location, addLocation] = useState('');
-  const [activity, addActivity] = useState('');
+  const [activityName, addNewActivity] = useState('');
   const [description, addDescription] = useState('');
+  const dispatch = useDispatch();
 
   const clickHandler = () => {
-    
+    const newActivity = {
+      location,
+      activityName,
+      description
+    }
+
+    console.log(newActivity);
+
+    dispatch(addActivity(newActivity));
   };
 
   return (
@@ -20,8 +31,8 @@ const Form = () => {
         />
         <label>Activity</label>
         <input 
-          value={activity} 
-          onChange={(e) => addActivity(e.target.value)}
+          value={activityName} 
+          onChange={(e) => addNewActivity(e.target.value)}
         />
         <label>Description</label>
         <input 
